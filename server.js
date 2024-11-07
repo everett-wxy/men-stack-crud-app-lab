@@ -6,6 +6,8 @@ require("dotenv").config();
 connectDB();
 const quoteRouter = require('./src/routers/quoteRouter');
 
+app.use(express.json());
+
 app.use('/', quoteRouter);
 
 app.listen(PORT, () => {
