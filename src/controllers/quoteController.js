@@ -12,6 +12,21 @@ const getAllQuotes = async (req, res) => {
     }
 };
 
+const getQuote = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const quote = await Quote.findById(id);
+        res.json(quote);
+        if (!quote) {
+            return res.status(404).json({ message: "Quote not found" });
+        }
+
+    } catch (error) {
+        console.error("Error fetching quotes: ", error);
+        throw error;
+    }
+};
+
 const postQuotes = async (req, res) => {
     try {
         // const newQuotes = await Quote.create({
@@ -56,4 +71,4 @@ const updateQuotes = async (req, res) => {
     }
 };
 
-module.exports = { getAllQuotes, postQuotes, deleteQuotes, updateQuotes };
+module.exports = { getAllQuotes, postQuotes, deleteQuotes, updateQuotes, getQuote };
